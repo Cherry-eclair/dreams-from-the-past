@@ -4,6 +4,7 @@ class OverworldMap {
 		this.gameObjects = config.gameObjects;
 		this.walls = config.walls || {};
 		this.cutsceneSpaces = config.cutsceneSpaces || {};
+		this.objectCutsceneSpaces = config.objectCutsceneSpaces || {};
 
 		this.lowerImage = new Image();
 		this.lowerImage.src = config.lowerSrc;
@@ -14,6 +15,8 @@ class OverworldMap {
 		this.isCutscenePlaying = false;
 	}
 
+	//Отрисовка нижнего слоя карты
+
 	drawLowerImage(ctx, cameraPerson) {
 		ctx.drawImage(
 			this.lowerImage,
@@ -21,6 +24,8 @@ class OverworldMap {
 			utils.widthGrid(5) - cameraPerson.y
 			)
 	}
+
+	//Отрисовка верхнео слоя карты
 
 	drawUpperImage(ctx, cameraPerson) {
 		ctx.drawImage(
@@ -72,6 +77,16 @@ class OverworldMap {
 		}
 	}
 
+	checkForActionObjectCutscene() {
+		const hero = this.gameObjects["hero"];
+		const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+		const match = this.objectCutsceneSpaces[`${nextCoords.x},${nextCoords.y}`];
+
+		if (!this.isCutscenePlaying && match) {
+			this.startCutscene(match[0].events)
+		}
+	}
+
 	checkForFootstepCutscene() {
 		const hero = this.gameObjects["hero"];
 		const match = this.cutsceneSpaces[ `${hero.x},${hero.y}`];
@@ -79,6 +94,8 @@ class OverworldMap {
 			this.startCutscene(match[0].events)
 		}
 	}
+
+	//Коллизия 
 
 	addWall(x, y) {
 		this.walls[`${x},${y}`] = true;
@@ -95,6 +112,8 @@ class OverworldMap {
 	}
 }
 
+//Карты
+
 window.OverworldMaps = {
 	LivingRoom: {
 		lowerSrc: "images/maps/livingroom_lower.png",
@@ -106,7 +125,7 @@ window.OverworldMaps = {
 				y: utils.widthGrid(7),
 				src: "images/characters/hero.png"
 			}),
-			/*npcA: new Person({
+			npcA: new Person({
 				x: utils.widthGrid(7),
 				y: utils.widthGrid(10),
 				src: "images/characters/hero.png",
@@ -125,7 +144,7 @@ window.OverworldMaps = {
 					]
 				}
 				]
-			}),*/
+			}),
 		},
 		walls: {
 			[utils.asGridCoords(0,3)] : true,
@@ -215,7 +234,7 @@ window.OverworldMaps = {
 			[utils.asGridCoords(9,4)]: [
 				{
 					events: [
-						{type: "textMessage", text: "Цветочек Жора. Мамин любимый цветочек."}
+						{type: "textMessage", text: "Цветочек Жора. Мамин любимый цветок."}
 					]
 				}
 			]

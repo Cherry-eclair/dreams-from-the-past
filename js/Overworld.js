@@ -43,7 +43,7 @@ class Overworld {
 
 	bindActionInput() {
 		new KeyPressListener("KeyZ", () => {
-			this.map.checkForActionCutscene();
+			this.map.checkForActionCutscene() || this.map.checkForActionObjectCutscene();
 		})
 	}
 
@@ -63,7 +63,6 @@ class Overworld {
 
 	init() {
 		this.startMap(window.OverworldMaps.LivingRoom);
-
 		this.bindActionInput();
 		this.bindHeroPositionCheck();
 
@@ -76,6 +75,8 @@ class Overworld {
 			{ type: "textMessage", text: "Привет:)"},
 			//{who: "hero", type: "walk", direction: "down" },
 			])
+
+		
 		
 
 	}
