@@ -126,21 +126,20 @@ window.OverworldMaps = {
 				src: "images/characters/hero.png"
 			}),
 			npcA: new Person({
-				x: utils.widthGrid(7),
-				y: utils.widthGrid(10),
-				src: "images/characters/hero.png",
+				x: utils.widthGrid(3),
+				y: utils.widthGrid(8),
+				src: "images/characters/npc1.png",
 				behaviorLoop: [
-					{type: "stand", direction: "left", time: 800 },
-					{type: "stand", direction: "down", time: 800 },
+					{type: "stand", direction: "left", time: 1800 },
+					{type: "stand", direction: "down", time: 2800 },
 					{type: "stand", direction: "right", time: 800 },
-					{type: "stand", direction: "up", time: 800 },
-					{type: "stand", direction: "down", time: 800 },
+					{type: "stand", direction: "down", time: 3800 },
 				],
 				talking: [
 				{
 					events: [
-						{type: "textMessage", text: "Hello", faceHero: "npcA"},
-						{type: "textMessage", text: "I am you"}
+						{type: "textMessage", text: "Привет", faceHero: "npcA"},
+						{type: "textMessage", text: "Как дела?"}
 					]
 				}
 				]
@@ -175,6 +174,7 @@ window.OverworldMaps = {
 			[utils.asGridCoords(3,12)] : true,
 			[utils.asGridCoords(4,12)] : true,
 			[utils.asGridCoords(5,13)] : true,
+			[utils.asGridCoords(6,13)] : true,
 			[utils.asGridCoords(7,12)] : true,
 			[utils.asGridCoords(8,12)] : true,
 			[utils.asGridCoords(9,12)] : true,
@@ -205,7 +205,19 @@ window.OverworldMaps = {
 			[utils.asGridCoords(1,11)] : true,
 			[utils.asGridCoords(2,11)] : true,
 			[utils.asGridCoords(3,11)] : true,
-		
+
+			[utils.asGridCoords(7,8)] : true,
+			[utils.asGridCoords(7,9)] : true,
+			[utils.asGridCoords(7,10)] : true,
+			[utils.asGridCoords(8,7)] : true,
+			[utils.asGridCoords(8,8)] : true,
+			[utils.asGridCoords(8,9)] : true,
+			[utils.asGridCoords(8,10)] : true,
+			[utils.asGridCoords(9,8)] : true,
+			[utils.asGridCoords(9,9)] : true,
+			[utils.asGridCoords(9,10)] : true,
+			[utils.asGridCoords(10,11)] : true,
+
 		},
 		cutsceneSpaces: {
 			[utils.asGridCoords(5,12)]: [
@@ -237,7 +249,29 @@ window.OverworldMaps = {
 						{type: "textMessage", text: "Цветочек Жора. Мамин любимый цветок."}
 					]
 				}
-			]
+			],
+			[utils.asGridCoords(6,4)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Книжный шкаф"}
+					]
+				}
+			],
+			[utils.asGridCoords(7,4)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Книжный шкаф"}
+					]
+				}
+			],
+			[utils.asGridCoords(3,11)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Мои подарки на день рождения"},
+						{type: "textMessage", text: "Открою их позже"}
+					]
+				}
+			],
 		}
 	},
 	Hall: {
@@ -250,15 +284,8 @@ window.OverworldMaps = {
 				y: utils.widthGrid(9),
 				src: "images/characters/hero.png"
 			}),
-			//npc: new Person({
-			//	x: utils.widthGrid(7),
-			//	y: utils.widthGrid(11),
-			//	src: "images/characters/spritesheet.png"
-			//}),
 		},
 		walls: {
-			[utils.asGridCoords(1,8)] : true,
-			[utils.asGridCoords(2,8)] : true,
 			[utils.asGridCoords(3,8)] : true,
 			[utils.asGridCoords(4,8)] : true,
 			[utils.asGridCoords(4,7)] : true,
@@ -324,10 +351,21 @@ window.OverworldMaps = {
 			[utils.asGridCoords(7,12)] : true,
 			[utils.asGridCoords(8,12)] : true,
 			[utils.asGridCoords(9,12)] : true,
-
+			[utils.asGridCoords(0,6)] : true,
+			[utils.asGridCoords(0,7)] : true,
+			[utils.asGridCoords(0,8)] : true,
 			[utils.asGridCoords(0,9)] : true,
 			[utils.asGridCoords(0,10)] : true,
-			[utils.asGridCoords(0,11)] : true
+			[utils.asGridCoords(0,11)] : true,
+			[utils.asGridCoords(1,5)] : true,
+			[utils.asGridCoords(2,5)] : true,
+			[utils.asGridCoords(3,6)] : true,
+			[utils.asGridCoords(3,7)] : true,
+			[utils.asGridCoords(3,8)] : true,
+
+			[utils.asGridCoords(3,9)] : true,
+			[utils.asGridCoords(1,6)] : true,
+			[utils.asGridCoords(2,6)] : true
 		},
 		cutsceneSpaces: {
 			[utils.asGridCoords(13,8)]: [
@@ -343,7 +381,276 @@ window.OverworldMaps = {
 						{type: "changeMap", map: "LivingRoom"}
 					]
 				}
+			],
+			[utils.asGridCoords(4,5)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Kitchen"}
+					]
+				}
+			],
+			[utils.asGridCoords(1,7)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall2"}
+					]
+				}
+			],
+			[utils.asGridCoords(2,7)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall2"}
+					]
+				}
+			],
+
+		},
+		objectCutsceneSpaces: {
+			[utils.asGridCoords(18,8)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Bathroom"}
+					]
+				}
+			],
+			[utils.asGridCoords(12,16)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Я не могу покинуть дом"}
+					]
+				}
+			],
+			[utils.asGridCoords(13,16)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Я не могу покинуть дом"}
+					]
+				}
 			]
 		}
-	}
+	}, 
+	Kitchen: {
+		lowerSrc: "images/maps/kitchen_lower.png",
+		upperSrc: "images/maps/kitchen_upper.png",
+		gameObjects: {
+			hero: new Person({
+				isPlayerControlled: true,
+				x: utils.widthGrid(4),
+				y: utils.widthGrid(5),
+				src: "images/characters/hero.png"
+			}),
+		},
+		walls: {
+			[utils.asGridCoords(0,4)] : true,
+			[utils.asGridCoords(0,5)] : true,
+			[utils.asGridCoords(0,6)] : true,
+			[utils.asGridCoords(0,7)] : true,
+			[utils.asGridCoords(0,8)] : true,
+			[utils.asGridCoords(1,4)] : true,
+			[utils.asGridCoords(2,4)] : true,
+			[utils.asGridCoords(3,4)] : true,
+			[utils.asGridCoords(4,4)] : true,
+			[utils.asGridCoords(5,4)] : true,
+			[utils.asGridCoords(6,5)] : true,
+			[utils.asGridCoords(5,6)] : true,
+			[utils.asGridCoords(5,7)] : true,
+			[utils.asGridCoords(5,8)] : true,
+
+			[utils.asGridCoords(1,9)] : true,
+			[utils.asGridCoords(2,9)] : true,
+			[utils.asGridCoords(3,9)] : true,
+			[utils.asGridCoords(4,9)] : true,
+			[utils.asGridCoords(2,6)] : true,
+			[utils.asGridCoords(3,6)] : true,
+			[utils.asGridCoords(3,9)] : true,
+			[utils.asGridCoords(1,7)] : true,
+			[utils.asGridCoords(2,7)] : true,
+			[utils.asGridCoords(3,7)] : true,
+			[utils.asGridCoords(2,8)] : true,
+			[utils.asGridCoords(3,8)] : true,
+		},
+		cutsceneSpaces: {
+			[utils.asGridCoords(5,5)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall"}
+					]
+				}
+			]
+		},
+		objectCutsceneSpaces: {
+			[utils.asGridCoords(1,4)]: [
+				{
+					events: [
+						{type: "textMessage", text: "Холодильник."},
+						{type: "textMessage", text: "Внутри много еды."}
+					]
+				}
+			]
+		}
+	},
+	Bathroom: {
+		lowerSrc: "images/maps/bathroom_lower.png",
+		upperSrc: "images/maps/bathroom_upper.png",
+		gameObjects: {
+			hero: new Person({
+				isPlayerControlled: true,
+				x: utils.widthGrid(1),
+				y: utils.widthGrid(6),
+				src: "images/characters/hero.png"
+			}),
+		},
+		walls: {
+			[utils.asGridCoords(1,3)] : true,
+			[utils.asGridCoords(2,3)] : true,
+			[utils.asGridCoords(3,3)] : true,
+			[utils.asGridCoords(4,4)] : true,
+			[utils.asGridCoords(4,5)] : true,
+			[utils.asGridCoords(4,6)] : true,
+			[utils.asGridCoords(2,7)] : true,
+			[utils.asGridCoords(3,7)] : true,
+			[utils.asGridCoords(1,8)] : true,
+			[utils.asGridCoords(0,7)] : true,
+			[utils.asGridCoords(0,4)] : true,
+			[utils.asGridCoords(0,5)] : true,
+			[utils.asGridCoords(0,6)] : true,
+
+			[utils.asGridCoords(1,4)] : true,
+			[utils.asGridCoords(2,4)] : true,
+			[utils.asGridCoords(3,5)] : true,
+			[utils.asGridCoords(3,6)] : true,
+		},
+		cutsceneSpaces: {
+			[utils.asGridCoords(1,7)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall"}
+					]
+				}
+			]
+		},
+		objectCutsceneSpaces: {
+			
+		}
+	},
+	Hall2: {
+		lowerSrc: "images/maps/hall2_lower.png",
+		upperSrc: "images/maps/hall2_upper.png",
+		gameObjects: {
+			hero: new Person({
+				isPlayerControlled: true,
+				x: utils.widthGrid(1),
+				y: utils.widthGrid(8),
+				src: "images/characters/hero.png"
+			}),
+		},
+		walls: {
+			[utils.asGridCoords(0,4)] : true,
+			[utils.asGridCoords(0,5)] : true,
+			[utils.asGridCoords(0,6)] : true,
+			[utils.asGridCoords(0,7)] : true,
+			[utils.asGridCoords(0,8)] : true,
+			[utils.asGridCoords(0,9)] : true,
+			[utils.asGridCoords(1,3)] : true,
+			[utils.asGridCoords(2,3)] : true,
+			[utils.asGridCoords(3,3)] : true,
+			[utils.asGridCoords(4,4)] : true,
+			[utils.asGridCoords(5,5)] : true,
+			[utils.asGridCoords(4,6)] : true,
+			[utils.asGridCoords(4,7)] : true,
+			[utils.asGridCoords(4,8)] : true,
+			[utils.asGridCoords(1,10)] : true,
+			[utils.asGridCoords(2,10)] : true,
+			[utils.asGridCoords(3,9)] : true
+		},
+		cutsceneSpaces: {
+			[utils.asGridCoords(1,9)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall"}
+					]
+				}
+			],
+			[utils.asGridCoords(2,9)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall"}
+					]
+				}
+			]
+		},
+		objectCutsceneSpaces: {
+			[utils.asGridCoords(2,3)]: [
+				{
+					events: [
+						{type: "changeMap", map: "HeroRoom"}
+					]
+				}
+			]
+		}
+	},
+	HeroRoom: {
+		lowerSrc: "images/maps/heroroom_lower.png",
+		upperSrc: "images/maps/heroroom_upper.png",
+		gameObjects: {
+			hero: new Person({
+				isPlayerControlled: true,
+				x: utils.widthGrid(2),
+				y: utils.widthGrid(7),
+				src: "images/characters/hero.png"
+			}),
+		},
+		walls: {
+			[utils.asGridCoords(1,3)] : true,
+			[utils.asGridCoords(2,3)] : true,
+			[utils.asGridCoords(3,3)] : true,
+			[utils.asGridCoords(4,3)] : true,
+			[utils.asGridCoords(5,3)] : true,
+			[utils.asGridCoords(6,3)] : true,
+			[utils.asGridCoords(7,3)] : true,
+			[utils.asGridCoords(8,3)] : true,
+			[utils.asGridCoords(0,4)] : true,
+			[utils.asGridCoords(0,5)] : true,
+			[utils.asGridCoords(0,6)] : true,
+			[utils.asGridCoords(0,7)] : true,
+
+			[utils.asGridCoords(9,4)] : true,
+			[utils.asGridCoords(9,5)] : true,
+			[utils.asGridCoords(9,6)] : true,
+			[utils.asGridCoords(9,7)] : true,
+			[utils.asGridCoords(9,8)] : true,
+			[utils.asGridCoords(9,8)] : true,
+			[utils.asGridCoords(1,8)] : true,
+			[utils.asGridCoords(2,9)] : true,
+			[utils.asGridCoords(3,8)] : true,
+			[utils.asGridCoords(4,8)] : true,
+			[utils.asGridCoords(5,8)] : true,
+			[utils.asGridCoords(6,8)] : true,
+			[utils.asGridCoords(7,8)] : true,
+			[utils.asGridCoords(8,8)] : true,
+
+			[utils.asGridCoords(1,4)] : true,
+			[utils.asGridCoords(2,4)] : true,
+			[utils.asGridCoords(3,4)] : true,
+			[utils.asGridCoords(5,4)] : true,
+			[utils.asGridCoords(6,4)] : true,
+			[utils.asGridCoords(7,4)] : true,
+			[utils.asGridCoords(8,4)] : true,
+			[utils.asGridCoords(2,5)] : true,
+			[utils.asGridCoords(5,5)] : true,
+			[utils.asGridCoords(6,5)] : true,
+		},
+		cutsceneSpaces: {
+			[utils.asGridCoords(2,8)]: [
+				{
+					events: [
+						{type: "changeMap", map: "Hall2"}
+					]
+				}
+			]
+		},
+		objectCutsceneSpaces: {
+			
+		}
+	},
 }
