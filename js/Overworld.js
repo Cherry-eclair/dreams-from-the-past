@@ -33,10 +33,12 @@ class Overworld {
 
 			//Отрисовка верхнего слоя
 			this.map.drawUpperImage(this.ctx, cameraPerson);
-
-			requestAnimationFrame(() => {
-				step();
-			})
+			if (!this.map.isPause) {
+				requestAnimationFrame(() => {
+					step();
+				})
+			}
+			
 		}
 		step();
 	}
@@ -45,6 +47,16 @@ class Overworld {
 		new KeyPressListener("KeyZ", () => {
 			this.map.checkForActionCutscene() || this.map.checkForActionObjectCutscene();
 		})
+		new KeyPressListener("Space", () => {
+			this.map.checkForActionCutscene() || this.map.checkForActionObjectCutscene();
+		})
+		new KeyPressListener("Escape", () => {
+			if (!this.map.isCutscenePlaying) {
+				this.map.startCutscene([
+					{type: "pause"}
+					])
+				}
+			})
 	}
 
 	bindHeroPositionCheck() {
@@ -55,10 +67,19 @@ class Overworld {
 		})
 	}
 
-	startMap(mapConfig) {
+	startMap(mapConfig, heroInitialState=null) {
 		this.map = new OverworldMap(mapConfig);
 		this.map.overworld = this;
 		this.map.mountObjects();
+
+		if (heroInitialState) {
+			const {hero} = this.map.gameObjects;
+			this.map.removeWall(hero.x, hero.y);
+			hero.x = heroInitialState.x;
+			hero.y = heroInitialState.y;
+			hero.direction = heroInitialState.direction;
+			this.map.addWall(hero.x, hero.y);
+		}
 	}
 
 	init() {
@@ -71,10 +92,10 @@ class Overworld {
 
 		this.startGameLoop();
 
-		this.map.startCutscene([
+		/*this.map.startCutscene([
 			{ type: "textMessage", text: "Привет:)"},
 			//{who: "hero", type: "walk", direction: "down" },
-			])
+			])*/
 
 		
 		

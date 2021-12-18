@@ -59,15 +59,32 @@ class OverworldEvent {
 		message.init( document.querySelector(".game-container"))
 	}
 
-	changeMap(resolse) {
+	changeMap(resolve) {
 
 		const sceneTransition = new SceneTransition();
 		sceneTransition.init(document.querySelector(".game-container"), () => {
-			this.map.overworld.startMap( window.OverworldMaps[this.event.map]);
-			//resolve();
+			this.map.overworld.startMap( window.OverworldMaps[this.event.map], {
+				x: this.event.x,
+				y: this.event.y,
+				direction: this.event.direction,
+			});
+			resolve();
 
 			sceneTransition.fadeOut();
 		})
+	}
+
+	pause(resolve) {
+		
+		this.map.isPause = true;
+		const menu = new PauseMenu({
+			onComplete: () => {
+				resolve();
+				this.map.isPause = false;
+				this.map.overworld.startGameLoop();
+			}
+		});
+		menu.init(document.querySelector(".game-container"));
 	}
 
 	init() {

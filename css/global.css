@@ -1,5 +1,5 @@
 :root {
-	--border-color: #ffff4D;
+	--border-color: #fff;
 	--dialog-background: #111;
 
 	--menu-background: #333;
@@ -27,7 +27,7 @@ body {
 	margin: 0 auto;
 	outline: 1px solid white;
 
-	transform: scale(1.5) translateY(40%);
+	transform: scale(1.6) translateY(30%);
 }
 
 .game-container canvas {

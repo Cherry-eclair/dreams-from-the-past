@@ -13,6 +13,7 @@ class OverworldMap {
 		this.upperImage.src = config.upperSrc;
 
 		this.isCutscenePlaying = false;
+		this.isPause = false;
 	}
 
 	//Отрисовка нижнего слоя карты
@@ -116,6 +117,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
 	LivingRoom: {
+		id: "LivingRoom",
 		lowerSrc: "images/maps/livingroom_lower.png",
 		upperSrc: "images/maps/livingroom_upper.png",
 		gameObjects: {
@@ -223,14 +225,21 @@ window.OverworldMaps = {
 			[utils.asGridCoords(5,12)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(12),
+						y: utils.widthGrid(9),
+						direction: "down"
+					}
 					]
 				}
 			],
 			[utils.asGridCoords(6,12)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(13),
+						y: utils.widthGrid(9),
+						direction: "down"}
 					]
 				}
 			],
@@ -275,6 +284,7 @@ window.OverworldMaps = {
 		}
 	},
 	Hall: {
+		id: "Hall",
 		lowerSrc: "images/maps/hall_lower.png",
 		upperSrc: "images/maps/hall_upper.png",
 		gameObjects: {
@@ -371,35 +381,50 @@ window.OverworldMaps = {
 			[utils.asGridCoords(13,8)]: [
 				{
 					events: [
-						{type: "changeMap", map: "LivingRoom"}
+						{type: "changeMap", map: "LivingRoom",
+						x: utils.widthGrid(6),
+						y: utils.widthGrid(11),
+						direction: "up"}
 					]
 				}
 			],
 			[utils.asGridCoords(12,8)]: [
 				{
 					events: [
-						{type: "changeMap", map: "LivingRoom"}
+						{type: "changeMap", map: "LivingRoom",
+						x: utils.widthGrid(5),
+						y: utils.widthGrid(11),
+						direction: "up"}
 					]
 				}
 			],
 			[utils.asGridCoords(4,5)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Kitchen"}
+						{type: "changeMap", map: "Kitchen",
+						x: utils.widthGrid(4),
+						y: utils.widthGrid(5),
+						direction: "left"}
 					]
 				}
 			],
 			[utils.asGridCoords(1,7)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall2"}
+						{type: "changeMap", map: "Hall2",
+						x: utils.widthGrid(1),
+						y: utils.widthGrid(8),
+						direction: "up"}
 					]
 				}
 			],
 			[utils.asGridCoords(2,7)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall2"}
+						{type: "changeMap", map: "Hall2",
+						x: utils.widthGrid(2),
+						y: utils.widthGrid(8),
+						direction: "up"}
 					]
 				}
 			],
@@ -409,7 +434,10 @@ window.OverworldMaps = {
 			[utils.asGridCoords(18,8)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Bathroom"}
+						{type: "changeMap", map: "Bathroom",
+						x: utils.widthGrid(1),
+						y: utils.widthGrid(6),
+						direction: "up"}
 					]
 				}
 			],
@@ -430,6 +458,7 @@ window.OverworldMaps = {
 		}
 	}, 
 	Kitchen: {
+		id: "Kitchen",
 		lowerSrc: "images/maps/kitchen_lower.png",
 		upperSrc: "images/maps/kitchen_upper.png",
 		gameObjects: {
@@ -473,7 +502,10 @@ window.OverworldMaps = {
 			[utils.asGridCoords(5,5)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(5),
+						y: utils.widthGrid(5),
+						direction: "right"}
 					]
 				}
 			]
@@ -490,6 +522,7 @@ window.OverworldMaps = {
 		}
 	},
 	Bathroom: {
+		id: "Bathroom",
 		lowerSrc: "images/maps/bathroom_lower.png",
 		upperSrc: "images/maps/bathroom_upper.png",
 		gameObjects: {
@@ -524,7 +557,10 @@ window.OverworldMaps = {
 			[utils.asGridCoords(1,7)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(18),
+						y: utils.widthGrid(9),
+						direction: "down"}
 					]
 				}
 			]
@@ -534,6 +570,7 @@ window.OverworldMaps = {
 		}
 	},
 	Hall2: {
+		id: "Hall2",
 		lowerSrc: "images/maps/hall2_lower.png",
 		upperSrc: "images/maps/hall2_upper.png",
 		gameObjects: {
@@ -567,14 +604,20 @@ window.OverworldMaps = {
 			[utils.asGridCoords(1,9)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(1),
+						y: utils.widthGrid(8),
+						direction: "down"}
 					]
 				}
 			],
 			[utils.asGridCoords(2,9)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall"}
+						{type: "changeMap", map: "Hall",
+						x: utils.widthGrid(2),
+						y: utils.widthGrid(8),
+						direction: "down"}
 					]
 				}
 			]
@@ -583,13 +626,17 @@ window.OverworldMaps = {
 			[utils.asGridCoords(2,3)]: [
 				{
 					events: [
-						{type: "changeMap", map: "HeroRoom"}
+						{type: "changeMap", map: "HeroRoom",
+						x: utils.widthGrid(2),
+						y: utils.widthGrid(7),
+						direction: "up"}
 					]
 				}
 			]
 		}
 	},
 	HeroRoom: {
+		id: "HeroRoom",
 		lowerSrc: "images/maps/heroroom_lower.png",
 		upperSrc: "images/maps/heroroom_upper.png",
 		gameObjects: {
@@ -644,7 +691,10 @@ window.OverworldMaps = {
 			[utils.asGridCoords(2,8)]: [
 				{
 					events: [
-						{type: "changeMap", map: "Hall2"}
+						{type: "changeMap", map: "Hall2",
+						x: utils.widthGrid(2),
+						y: utils.widthGrid(4),
+						direction: "down"}
 					]
 				}
 			]
