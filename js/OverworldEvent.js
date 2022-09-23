@@ -78,6 +78,7 @@ class OverworldEvent {
 		
 		this.map.isPause = true;
 		const menu = new PauseMenu({
+			progress: this.map.overworld.progress,
 			onComplete: () => {
 				resolve();
 				this.map.isPause = false;
@@ -85,6 +86,11 @@ class OverworldEvent {
 			}
 		});
 		menu.init(document.querySelector(".game-container"));
+	}
+
+	addStoryFlag(resolve) {
+		window.playerState.storyFlags[this.event.flag] = true;
+		resolve();
 	}
 
 	init() {

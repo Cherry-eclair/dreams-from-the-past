@@ -80,10 +80,37 @@ class Overworld {
 			hero.direction = heroInitialState.direction;
 			this.map.addWall(hero.x, hero.y);
 		}
+
+		this.progress.mapId = mapConfig.id;
+		this.progress.startingHeroX = this.map.gameObjects.hero.x;
+		this.progress.startingHeroY = this.map.gameObjects.hero.y;
+		this.progress.startingHeroDirection = this.map.gameObjects.hero.direction;
 	}
 
-	init() {
-		this.startMap(window.OverworldMaps.LivingRoom);
+	async init() {
+
+		const container = document.querySelector(".game-container");
+
+		this.progress = new Progress();
+
+		this.titleScene = new TitleScreen({
+			progress: this.progress
+		})
+		const useSaveFile = await this.titleScene.init(container);
+
+		let initialHeroState = null;
+		
+		if (useSaveFile) {
+			this.progress.load();
+			initialHeroState = {
+				x: this.progress.startingHeroX,
+				y: this.progress.startingHeroY,
+				direction: this.progress.startingHeroDirection,
+			}
+		}
+
+
+		this.startMap(window.OverworldMaps[this.progress.mapId], initialHeroState);
 		this.bindActionInput();
 		this.bindHeroPositionCheck();
 
@@ -96,9 +123,5 @@ class Overworld {
 			{ type: "textMessage", text: "Привет:)"},
 			//{who: "hero", type: "walk", direction: "down" },
 			])*/
-
-		
-		
-
 	}
 }

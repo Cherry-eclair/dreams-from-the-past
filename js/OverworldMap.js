@@ -74,7 +74,14 @@ class OverworldMap {
 			return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
 		});
 		if (!this.isCutscenePlaying && match && match.talking.length) {
-			this.startCutscene(match.talking[0].events)
+
+			const relevantScenario = match.talking.find(scenario => {
+				return(scenario.required || []).every(sf => {
+					return playerState.storyFlags[sf]
+
+				})
+			})
+			relevantScenario && this.startCutscene(relevantScenario.events)
 		}
 	}
 
@@ -84,7 +91,13 @@ class OverworldMap {
 		const match = this.objectCutsceneSpaces[`${nextCoords.x},${nextCoords.y}`];
 
 		if (!this.isCutscenePlaying && match) {
-			this.startCutscene(match[0].events)
+			const relevantScenario = match.find(scenario => {
+				return(scenario.required || []).every(sf => {
+					return playerState.storyFlags[sf]
+
+				})
+			})
+			relevantScenario && this.startCutscene(relevantScenario.events)
 		}
 	}
 
@@ -139,9 +152,16 @@ window.OverworldMaps = {
 				],
 				talking: [
 				{
+					required: ["Talked_to_npsA"],
+					events: [
+						{type: "textMessage", text: "Извини, я пока занята", faceHero: "npcA"}
+					]
+				},
+				{
 					events: [
 						{type: "textMessage", text: "Привет", faceHero: "npcA"},
-						{type: "textMessage", text: "Как дела?"}
+						{type: "textMessage", text: "Как дела?"},
+						{type: "addStoryFlag", flag: "Talked_to_npsA"}
 					]
 				}
 				]
@@ -223,6 +243,7 @@ window.OverworldMaps = {
 		},
 		cutsceneSpaces: {
 			[utils.asGridCoords(5,12)]: [
+
 				{
 					events: [
 						{type: "changeMap", map: "Hall",
